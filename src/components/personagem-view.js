@@ -1,39 +1,43 @@
-function render() {
-    this.ulPersonagens.innerHTML = ''
-    this.personagens.forEach(personagem => {
-        const personagemLI = this.criaPersonagem(personagem)
-        this.ulPersonagens.appendChild(personagemLI)
-    })
-}
+export class PersonagemView {
+  constructor(personagens) {
+    this.ulPersonagens = document.querySelector("ul#personagens");
+    this.personagens = personagens;
+  }
 
-criaPersonagem = (personagem) => {
-    const personagemLI = document.createElement('li')
-    personagemLI.classList.add('personagem')
+  render() {
+    this.ulPersonagens.innerHTML = "";
+    this.personagens.forEach((personagem) => {
+      const personagemLI = this.criaPersonagem(personagem);
+      this.ulPersonagens.appendChild(personagemLI);
+    });
+  }
+
+  criaPersonagem = (personagem) => {
+    const personagemLI = document.createElement("li");
+    personagemLI.classList.add("personagem", personagem.tipo);
 
     //const estaSelecionado = this.personagensSelecionados.indexOf(personagem) !== -1 //sintaxe para quando encontra no array
 
     //if (estaSelecionado) personagemLI.classList.add('selecionado')
 
-    personagemLI.innerHTML =
-
-    `
+    personagemLI.innerHTML = `
     <div class="container-superior">
         <div class="cabecalho">
             <div class="combate"></div>
             <div class="level">
                 <button class="diminuir-level">-</button>
-                <p class="level-texto">Level </p>
+                <p class="level-texto">Level ${personagem.level}</p>
                 <button class="aumentar-level">+</button>
             </div>
         </div>
         <div class="container-imagem">
             <div class="imagem"></div>
             <div class="container-tipo">
-                <h2 class="tipo"></h2>
+                <h2 class="tipo">${personagem.tipo}</h2>
             </div>
         </div>
         <div class="container-nome">
-            <h3 class="nome"></h3>
+            <h3 class="nome">${personagem.nome}</h3>
         </div>
         <div class="container-descricao">
             <p class="descricao"></p>
@@ -41,12 +45,12 @@ criaPersonagem = (personagem) => {
     </div>
     <div class="container-inferior">
         <img src="./src/assets/img/icone-mana.png" class="icone-mana">
-        <p class="insignia"></p>
+        <p class="insignia">${personagem.obterInsignia}</p>
         <img src="./src/assets/img/icone-vida.png" class="icone-vida">
-        <h4 class="mana"></h4>
-        <h4 class="vida"></h4>
+        <h4 class="mana">${personagem.mana}</h4>
+        <h4 class="vida">${personagem.vida}</h4>
     </div>
-    `
+    `;
 
     /*const containerLevel = personagemLI.querySelector('.level')
     containerLevel.onclick = (evt) => {
@@ -59,7 +63,6 @@ criaPersonagem = (personagem) => {
         this.render()
     }*/
 
-
     /*personagemLI.onclick = () => {
         const jaTem2Selecionados = this.personagensSelecionados.length === 2
         if (!jaTem2Selecionados || estaSelecionado) {
@@ -71,11 +74,10 @@ criaPersonagem = (personagem) => {
         }
     }*/
 
-    return personagemLI
-}
+    return personagemLI;
+  };
 
-
-/*adicionaSelecao = (personagem) => {
+  /*adicionaSelecao = (personagem) => {
     this.personagensSelecionados.push(personagem)
     this.render()
 }
@@ -102,3 +104,4 @@ escutarEventoDuelo() {
         this.render()
     })
 }*/
+}
