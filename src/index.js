@@ -1,22 +1,11 @@
 import { Personagem } from "./modules/personagem.js"
+import { PersonagemView } from "./components/personagem-view.js"
+import { Mago } from "./modules/mago.js"
 
-const personagemAna = {
-    nome: 'Ana',
-    vida: 8,
-    mana: 10
-}
+const personagemPedrinho = new Personagem('Pedrinho', 5, 'Mago')
+const personagemJose = new Personagem('Jose', 3, 'Arqueiro')
 
-const personagemPedrinho = new Personagem()
-personagemPedrinho.nome = 'Pedrinho'
-personagemPedrinho.mana = 12
-personagemPedrinho.vida = 7
-personagemPedrinho.tipo = 'Mago'
-personagemPedrinho.level = 5
+const personagens = [personagemPedrinho, personagemJose]
 
-const personagemJose = new Personagem()
-personagemJose.nome = 'Jose'
-personagemJose.tipo = 'Arqueiro'
-personagemJose.level = 3
-
-console.log('Insígnia de ' + personagemPedrinho.nome + ': ' + personagemPedrinho.obterInsignia())
-console.log('Insígnia de ' + personagemJose.nome + ': ' + personagemJose.obterInsignia())
+new PersonagemView(personagens).render()
+console.log(new Mago('gelo', 7, 9))
